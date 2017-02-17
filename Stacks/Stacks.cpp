@@ -37,7 +37,18 @@ int main()
 	int x = 0, c;
 	do
 	{
-		
+		if (Que.i > -1) {
+			cout << "Here is the que from bottom to top left to right" << endl;
+			cout << "[";
+			for (int i = 0; i < Que.i; i++) {
+				cout << Que.record[i];
+				if (i != Que.i - 1) {
+					cout << ",";
+				}
+			}
+
+			cout << "]" << endl;
+		}
 		
 
 		do {
