@@ -1,198 +1,170 @@
 // Stacks.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-
-
 /*
-Julio Rojas, Adam Blakeslee, Douglas Loughmiller, and Beomsoo Kim 
+Julio Rojas, Adam Blakeslee, Douglas Loughmiller, and Beomsoo Kim
 Prof. F. Aljamal
 CIS 277
 14 II 2017
 */
+
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
-struct stack
+struct Stack
 {
-    int num;
-    stack*next;
+	int record[30];
+	int i = -1;
 };
 
-void create_stack(stack*&, stack*&, int&);
-void empty(stack*,int);
-void push(stack*&, stack*&, int, int&);
-void pop(stack*&, stack*&, int, int&);
-void tops(stack*, stack*, int);
-void purge (stack*&, stack*&, int, int&);
+void create_stack(Stack &s);
+void push(Stack &s);
+void pop(Stack &s);
+void purge(Stack &s);
+void tops(Stack s);
+void empty(Stack s);
+
 
 int main()
 {
-  stack*startptr;
-  stack*top;
-  int c;
-  int b = 0;
-  int x=0;
-    do
-    {
-      cout << "Type 1 to create stack." << endl;
-      cout << "Type 2 to push." << endl;
-      cout << "Type 3 to pop." << endl;
-      cout << "Type 4 to top." << endl;
-      cout << "Type 5 to empty." << endl;
-      cout << "Type 6 to purge." << endl;
-      cin >> c;
+	bool invalid;
+	bool running  = true;
+	
+	Stack Que;
+	int x = 0, c;
+	do
+	{
+		
+		
 
-      switch(c)
-      {
-        case 1: create_stack(startptr, top, b);
-          break;
-        case 2:push(startptr, top, b, x);
-          break;
-        case 3: pop(startptr, top, b, x);
-          break;
-        case 4: tops(startptr, top, b);
-          break;
-        case 5: empty (startptr,b);
-          break;
-        case 6: purge (startptr, top, b, x);
-          break;
-        default: "invalid input";
-          break;
-      }
-    }
-	while(c>0 && c<7);
-    return 0;
+		do {
+			invalid = false;
+			cout << "Type 1 to create stack." << endl;
+			cout << "Type 2 to push." << endl;
+			cout << "Type 3 to pop." << endl;
+			cout << "Type 4 to top." << endl;
+			cout << "Type 5 to empty." << endl;
+			cout << "Type 6 to purge." << endl;
+			cout << "Type 9 to quit." << endl;
+
+			cin >> c;
+
+			switch (c){
+				case 1: create_stack(Que);
+					break;
+				case 2: push(Que);
+					break;
+				case 3: pop(Que);
+					break;
+				case 4:	tops(Que);
+					break;
+				case 5: empty(*&Que);
+					break;
+				case 6: purge(*&Que);
+					break;
+				case 9: running = false;
+				default: cout << "invalid input" << endl;
+					invalid = true;
+					break;
+			}
+		} while (invalid);
+	} while (running);
+	return 0;
 }
 
-    void create_stack(stack*&startptr, stack*&top, int &i)
-    {
-      system("cls");
-      startptr = NULL;
-      top = NULL;
-      i = 1;
-    }
-    
-    void push(stack*&startptr, stack*&top, int i, int&x)
-    {
-      system("cls");
-      if(i==0)
-        {
-          cout << "stack does not exist" << endl;
-        }
-      else
-      {
-        stack*temp;
-        temp = new stack;
-        cout << "enter a number to push ";
-        cin >> temp ->num;
-        if(startptr == NULL)
-        {
-          startptr = temp;
-          top = temp;
-          temp -> next = NULL;
-          x++;
-        }
-        else
-        {
-        top -> next = temp;
-        top = temp;
-        x++;
-        }
-      }
-    }
-      void pop (stack*&startptr, stack*&top, int i, int&x)
-      {
-        system("cls");
-        stack*nuke;
+void create_stack(Stack &s){	
+	s.i = 0;
+	cout << "Stack created!" << endl;
+}
 
-        if(i==0)
-        {
-          cout << "Stack does not exist" << endl;
-        }
-        else if (startptr == NULL)
-        {
-          cout << "stack is empty" << endl;
-        }
-        else if (startptr -> next == NULL)
-        {
-          nuke=top;
-          delete nuke;
-          top=NULL;
-          x--;
-        }
-        else
-          {
-            nuke = top;
-            stack * search = startptr;
-            while(search->next!=top)
-              {
-                search = search->next;
-              }
-            top = search;
-            top ->next= NULL;
-            delete nuke;
-          }
-      }
-      void tops(stack * startptr, stack * top, int i)
-      {
-        system("cls");
-        if(i == 0)
-        {
-          cout << "Stack does not exist" << endl;
-        }
-        else if(startptr == NULL)
-        {
-          cout << "stack empty" << endl;
-        }
-        else
-        {
-          cout << "top item is: " << top->num << endl;
-        }
-      }
-      void empty (stack*startptr, int i)
-      {
-	  	system("cls");
-	  	if (i==0)
-	  	{
-	  		cout << "stack does not exist" << endl;
-	  	}
-	  else if(startptr == NULL)
-	  {
-	  	cout << "stack empty" << endl;
-	  }
-	  else
-		{ 
-	  		cout << "stack not empty" << endl;	
-		}
-	  }
-	  void purge(stack*&startptr, stack*&top, int i, int&x)
-	  {
-	  	system ("cls");
-	  	if( i == 0)
-	  	{
-	  		cout << "stack does not exist" << endl;
-		}
-		else if(startptr == NULL)
-		{
-			cout << "stack already empty" << endl;
-		}
-		else
-		{
-			stack * purge = startptr;
-			stack * purge2;
-			for (int z =0; z<x; z++)
-			{
-				purge2=purge;
-				purge=purge->next;
-				delete purge2;
-			}
-		startptr = NULL;
-		top = NULL;
-		x = 0;
-		x = 0;
-		cout << "stack purge" << endl;
-		}
-	  }
+void push(Stack &s){	
+	system("cls");
+	if (s.i == -1){
+		cout << "stack does not exist" << endl;
+		getchar();
+	}
+
+	else if (s.i == 29) {
+		cout << "The stack is full!" << endl;
+		getchar();
+	}
+
+	else{	
+		cout << "enter a number to push " << endl;
+		cin >> s.record[s.i];
+		s.i++;
+	}
+}
+
+void pop(Stack &s){
+
+	if (s.i == -1){
+		cout << "Stack does not exist" << endl;
+		getchar();
+	}
+
+	else if (s.i == 0){
+		cout << "stack is empty" << endl;
+		getchar();
+	}
+
+	else{
+		s.i--;
+	}
+}
+
+void tops(Stack s){
+
+	if (s.i == -1){
+		cout << "Stack does not exist" << endl;
+		getchar();
+	}
+
+	else if (s.i == 0){
+		cout << "stack empty" << endl;
+		getchar();
+	}
+
+	else{
+		cout << "top item is: " << s.record[s.i - 1] << endl;
+		getchar();
+	}
+}
+
+void empty(Stack s){
+	
+
+	if (s.i == -1){
+		cout << "stack does not exist" << endl;
+		getchar();
+	}
+	else if (s.i == 0){
+		cout << "stack empty" << endl;
+		getchar();
+	}
+	else{
+		cout << "stack not empty" << endl;
+		getchar();
+	}
+}
+
+void purge(Stack &s){
+
+	system("cls");
+	if (s.i == -1){
+		cout << "stack does not exist" << endl;
+		getchar();
+	}
+
+	else if (s.i == 0){
+		cout << "stack already empty" << endl;
+		getchar();
+	}
+
+	else{
+		s.i = 0;
+	}
+}
