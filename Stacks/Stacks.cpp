@@ -112,8 +112,7 @@ void push(Stack &s){
 
 	else{	
 		cout << "enter a number to push " << endl;
-		cin >> s.record[s.i];
-		s.i++;
+		cin >> s.record[s.i++];
 	}
 }
 
