@@ -171,7 +171,6 @@ void empty(Stack s){
 
 void purge(Stack &s){
 
-	system("cls");
 	if (s.i == -1){
 		cout << "stack does not exist" << endl;
 		getchar();
