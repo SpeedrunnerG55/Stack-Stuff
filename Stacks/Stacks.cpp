@@ -44,7 +44,7 @@ void showStack(Stack s);
 
 int main()
 {
-	bool invalid, running  = true;
+	bool running  = true;
 	
 	Stack Que;
 	int x = 0;
