@@ -34,7 +34,8 @@ int main()
 	bool running  = true;
 	
 	Stack Que;
-	int x = 0, c;
+	int x = 0;
+	char c;
 	do
 	{
 		if (Que.i > -1) {
@@ -64,19 +65,19 @@ int main()
 			cin >> c;
 
 			switch (c){
-				case 1: create_stack(Que);
+				case '1': create_stack(Que);
 					break;
-				case 2: push(Que);
+				case '2': push(Que);
 					break;
-				case 3: pop(Que);
+				case '3': pop(Que);
 					break;
-				case 4:	tops(Que);
+				case '4':	tops(Que);
 					break;
-				case 5: empty(*&Que);
+				case '5': empty(*&Que);
 					break;
-				case 6: purge(*&Que);
+				case '6': purge(*&Que);
 					break;
-				case 9: running = false;
+				case '9': running = false;
 				default: cout << "invalid input" << endl;
 					invalid = true;
 					break;
