@@ -20,60 +20,66 @@ struct Stack
 	int i = -1;
 };
 //"toolkit functions" not really
+
+//creates the stack
 void create_stack(Stack &s);
+
+//pushes a record onto the stack
 void push(Stack &s);
+
+//pop an item of of the stack
 void pop(Stack &s);
+
+//sets the stack pointer to 0 so it will not read anny of the data in the stack and just write over annything when written to
 void purge(Stack &s);
+
+//reads the first item on the stack
 void tops(Stack s);
+
+//checks to see if the stack is empty
 void empty(Stack s);
 
-void showStack(Stack s)
+//displayes whole content of stack (not using the toolkit functions)
+void showStack(Stack s);
 
 int main()
 {
-	bool invalid;
-	bool running  = true;
+	bool invalid, running  = true;
 	
 	Stack Que;
 	int x = 0;
 	char c;
 	do
-	{
+	{	
+		showStack(Que);
+		cout << "Type 1 to create stack." << endl;
+		cout << "Type 2 to push." << endl;
+		cout << "Type 3 to pop." << endl;
+		cout << "Type 4 to top." << endl;
+		cout << "Type 5 to empty." << endl;
+		cout << "Type 6 to purge." << endl;
+		cout << "Type 9 to quit." << endl;
+
+		cin >> c;
+
+		switch (c){
+			case '1': create_stack(Que);
+				break;
+			case '2': push(Que);
+				break;
+			case '3': pop(Que);
+				break;
+			case '4':	tops(Que);
+				break;
+			case '5': empty(*&Que);
+				break;
+			case '6': purge(*&Que);
+				break;
+			case '9': running = false;
+			default: cout << "invalid input" << endl;
+				break;
+		}
 		
-		
-
-		do {
-			showStack(Que);
-			invalid = false;
-			cout << "Type 1 to create stack." << endl;
-			cout << "Type 2 to push." << endl;
-			cout << "Type 3 to pop." << endl;
-			cout << "Type 4 to top." << endl;
-			cout << "Type 5 to empty." << endl;
-			cout << "Type 6 to purge." << endl;
-			cout << "Type 9 to quit." << endl;
-
-			cin >> c;
-
-			switch (c){
-				case '1': create_stack(Que);
-					break;
-				case '2': push(Que);
-					break;
-				case '3': pop(Que);
-					break;
-				case '4':	tops(Que);
-					break;
-				case '5': empty(*&Que);
-					break;
-				case '6': purge(*&Que);
-					break;
-				case '9': running = false;
-				default: cout << "invalid input" << endl;
-					invalid = true;
-					break;
-			}
-		} while (invalid);
 	} while (running);
 	return 0;
 }
