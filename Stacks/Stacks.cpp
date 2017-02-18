@@ -19,7 +19,7 @@ struct Stack
 	int record[30];
 	int i = -1;
 };
-
+//"toolkit functions" not really
 void create_stack(Stack &s);
 void push(Stack &s);
 void pop(Stack &s);
@@ -27,6 +27,7 @@ void purge(Stack &s);
 void tops(Stack s);
 void empty(Stack s);
 
+void showStack(Stack s)
 
 int main()
 {
@@ -38,21 +39,11 @@ int main()
 	char c;
 	do
 	{
-		if (Que.i > -1) {
-			cout << "Here is the que from bottom to top left to right" << endl;
-			cout << "[";
-			for (int i = 0; i < Que.i; i++) {
-				cout << Que.record[i];
-				if (i != Que.i - 1) {
-					cout << ",";
-				}
-			}
-
-			cout << "]" << endl;
-		}
+		
 		
 
 		do {
+			showStack(Que);
 			invalid = false;
 			cout << "Type 1 to create stack." << endl;
 			cout << "Type 2 to push." << endl;
@@ -85,6 +76,21 @@ int main()
 		} while (invalid);
 	} while (running);
 	return 0;
+}
+
+void showStack(Stack s) {
+	if (s.i > -1) {
+		cout << "Here is the que from bottom to top left to right" << endl;
+		cout << "[";
+		for (int i = 0; i < s.i; i++) {
+			cout << s.record[i];
+			if (i != s.i - 1) {
+				cout << ",";
+			}
+		}
+
+		cout << "]" << endl;
+	}
 }
 
 void create_stack(Stack &s){	
